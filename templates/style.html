@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block head %}
+<title>Styles</title>
+<style>
+img {
+	display:block;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	margin-bottom:10px;
+}
+p {
+	text-align:center;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+<header>
+        <div class="jumbotron text-center" style="margin-bottom:20">
+                <h1>{{ page_title }}</h1>
+                <p>{{ page_info }}</p>
+        </div>
+</header>
+<body>
+	{% if name %}
+	<p>Uploaded Image : <br><b>{{ name }}</b></p>
+	<p>Select style image for transfer</p>
+	
+	{% else %}
+	<p>No images! Please choose image from previous page.</p>
+	{% endif %}
+
+	{% if name %}
+	<div>
+		<a href = 'http://localhost:5000/transfer/gogh'><img src="/static/style_preset/gogh.jpg" alt="gogh" width = "60%" class="img-thumbnail"></a>
+		<a href = "http://localhost:5000/transfer/monet"><img src="/static/style_preset/monet.jpg" alt="monet" width = "60%" class="img-thumbnail"></a>
+		<a href = "http://localhost:5000/transfer/picasso"><img src="/static/style_preset/picasso.jpg" alt="picasso" width="60%" class="img-thumbnail"></a>
+		
+	
+	
+	</div>
+	{% else %}
+	{% endif %}
+
+{% endblock %}

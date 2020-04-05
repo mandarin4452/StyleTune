@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>Style Transfer</title>
+{% endblock %}
+
+
+
+{% block body %}
+<header>
+	<div class="jumbotron text-center" style="margin-bottom:20">
+        	<h1>{{ page_title }}</h1>
+                <p>{{ page_info }}</p>
+	</div>
+</header>
+
+
+<form action = "http://127.0.0.1:5000/style" method = "POST" enctype = "multipart/form-data">
+	<div class = "custom-file mb-3">
+      		<input type = "file" class="custom-file-input"  name = "file" accept='image/*' capture='camera'/>
+                <label class="custom-file-label">Choose file...</label>
+      	</div>
+
+        <div style="text-align:center;">
+        	<button type = "submit" class="btn btn-info">Upload</button>
+        </div>
+</form>
+        <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+        </script>
+
+
+{% endblock %}
+
+
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+	var fileName = $(this).val().split("\\").pop();
+	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>

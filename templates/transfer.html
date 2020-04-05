@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block head %}
+<title>Styles</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+  var source = new EventSource("/progress");
+  source.onmessage = function(event) {
+    var eventMessage = event.data;
+    var dataSplit = eventMessage.split('*',3);
+    var percentage = dataSplit[0];
+    var cur_process = dataSplit[1];
+    var image_url = dataSplit[2];
+    console.log(image_url);
+    
+    $('.progress-bar').css('width', percentage+'%').attr('aria-valuenow',percentage);
+    $('.progress-bar-label').text(percentage+'%');
+    $('.current-process').text(cur_process);
+    if (image_url != "") {
+      document.getElementById('result_image').src=image_url;
+    } else{
+      document.getElementById('result_image').src="/static/white.png"
+    }
+    console.log(event);
+    if(percentage == 100) {
+      source.close()
+      console.log("Redirect to result page");
+    }
+  }
+</script>  
+<style>
+img {
+	display:block;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	margin-bottom:10px;
+}
+p {
+	text-align:center;
+}
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+<header>
+        <div class="jumbotron text-center" style="margin-bottom:20">
+                <h1>{{ page_title }}</h1>
+                <p>{{ page_info }}</p>
+        </div>
+</header>
+<body>
+    <p>
+    <div class = "progress" style = "width: 80%; margin : 30px; ">
+      <div class = "progress-bar progress-bar-striped active"  role = "progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        <span class="progress-bar-label">0%</span>
+      </div>
+    </div>
+    </p>
+    <p><span class="current-process"></span></p>
+    <hr>
+    <img id = "result_image" src='' width = "200px" height = "50%" width = "50%">
+{% endblock %}
