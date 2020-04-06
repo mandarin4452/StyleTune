@@ -2,6 +2,7 @@
 
 {% block head %}
 <title>Style Transfer</title>
+<script src = "{{ url_for('static',filename='js/index.js') }}"></script>
 {% endblock %}
 
 
@@ -15,11 +16,14 @@
 </header>
 
 
-<form action = "http://127.0.0.1:5000/style" method = "POST" enctype = "multipart/form-data">
+<form action = "/style" method = "POST" enctype = "multipart/form-data">
 	<div class = "custom-file mb-3">
-      		<input type = "file" class="custom-file-input"  name = "file" accept='image/*' capture='camera'/>
-                <label class="custom-file-label">Choose file...</label>
-      	</div>
+      		<input type = "file" id = "uploadImage" class="custom-file-input"  name = "file" accept='image/*' capture='camera'/>
+                <label class="custom-file-label">Choose image</label>
+        </div>
+        <div id="preview">
+                <img id="imagePreview" src="">
+        </div>      
 
         <div style="text-align:center;">
         	<button type = "submit" class="btn btn-info">Upload</button>
