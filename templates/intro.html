@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block head %}
+{% endblock %}
+
+
+
+{% block body %}
+      <h1 class="mt-4 display-4 mb-2">Deep Photo Style Transfer</h1>
+      <p class="lead mb-5">'Deep Photo Style Transfer' further developed Leon A. Gatys' paper, "A Neural Algorithm of Artistic Style," from the perspective of photography, not painting.</p>
+      <p class="lead mb-5">By using content & style loss funcion from Luan's paper, there's crushing of detailed content and spillover phenomena.</p>
+      <p class="lead mb-5">To deal with those problems, this paper applied 'Photorealism Regularization' and 'Augmented Style Loss with Semantic Segmentation'</p>
+      <img src = "/static/example_pre.jpg" width="400">
+      <p class="lead mb-5">So that this kind of details could be fixed properly as shown below.</p>
+      
+      <img src = "/static/example_aft.jpg" width="400">
+{% endblock %}

@@ -1,50 +1,44 @@
-from flask import Flask, render_template, request, Response, redirect
+from flask import Flask,render_template,request, redirect, Response
 from werkzeug import secure_filename
-import os
-import time
 import requests
-import json
-
-
-#IMAGE_FOLDER = os.path.join('static','style')
+import time
 
 app = Flask(__name__)
 file_name = ""
 style = ""
-
 @app.route('/')
 def index():
-    title = "Main"
-    detail = "Select one of your images to transfer"
-    return render_template("index.html",page_title = title, page_info = detail)
+    return render_template('index.html',nav_home = "active")
 
-@app.route('/style', methods =['GET','POST'])
-def styler():
-    title = "Style"
-    detail = "Choose one of the styles given below"
+@app.route('/information')
+def info():
+    return render_template('intro.html',nav_info = "active")
 
+@app.route('/transfer')
+def transfer_home():
+    return render_template('transfer.html',nav_transfer = "active")
+
+@app.route('/transfer/style', methods =['GET','POST'])
+def style():
     if request.method == "POST":
         f = request.files['file']
-        print(f)
-        source = "../static/Images/" + str(f.filename)
+        print(f.filename)
         if f:
-            f.save("./static/Images/" + secure_filename(f.filename))
+            f.save("./static/images/" + secure_filename(f.filename))
             print("Image saved")
             global file_name
             file_name = f.filename
-            return render_template('style.html',page_title = title, page_info = detail, name = f.filename)
+            return render_template('style.html',nav_transfer = "active")
         else:
-            return redirect("/")
+            return redirect("/transfer")
 
-@app.route('/transfer/<style_type>')
+@app.route('/transfer/style/<style_type>')
 def transfer(style_type):
     global style
     style = str(style_type)
     fileName = str(file_name)
-    title = "Transfer"
-    detail = "Image transferring"
-    return render_template('transfer.html', page_title = title, page_info = detail)
-        
+    return render_template('transfer_final.html', nav_transfer = "active")
+
 
 @app.route('/progress')
 def progress():
@@ -91,5 +85,6 @@ def progress():
             time.sleep(1)
 
     return Response(generate(), mimetype = 'text/event-stream')
+
 if __name__ == "__main__":
-    app.run(host = '0.0.0.0', port = 5000, debug = True)
+    app.run(host = '0.0.0.0')

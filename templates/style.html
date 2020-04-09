@@ -1,48 +1,22 @@
 {% extends "layout.html" %}
+
 {% block head %}
-<title>Styles</title>
 <style>
-img {
-	display:block;
-	text-align:center;
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:20px;
-	margin-bottom:10px;
-}
-p {
-	text-align:center;
-}
+      li{
+            list-style:none;
+      }
 </style>
 {% endblock %}
 
+
+
 {% block body %}
-
-<header>
-        <div class="jumbotron text-center" style="margin-bottom:20">
-                <h1>{{ page_title }}</h1>
-                <p>{{ page_info }}</p>
-        </div>
-</header>
-<body>
-	{% if name %}
-	<p>Uploaded Image : <br><b>{{ name }}</b></p>
-	<p>Select style image for transfer</p>
-	
-	{% else %}
-	<p>No images! Please choose image from previous page.</p>
-	{% endif %}
-
-	{% if name %}
-	<div>
-		<a href = '/transfer/gogh'><img src="/static/style_preset/gogh.jpg" alt="gogh" width = "60%" class="img-thumbnail"></a>
-		<a href = "/transfer/monet"><img src="/static/style_preset/monet.jpg" alt="monet" width = "60%" class="img-thumbnail"></a>
-		<a href = "/transfer/picasso"><img src="/static/style_preset/picasso.jpg" alt="picasso" width="60%" class="img-thumbnail"></a>
-		
-	
-	
-	</div>
-	{% else %}
-	{% endif %}
-
+      <h1 class="mt-4 display-4 mb-2">Transfer - Style</h1>
+      <p class="lead mb-5">Choose the style to transfer</p>
+      <ul>
+		<li><a href = '/transfer/style/gogh'><img src="/static/style_preset/gogh.jpg" alt="gogh" width = "300" height = "300" class="img-thumbnail"></a></li>
+		<li><a href = "/transfer/style/monet"><img src="/static/style_preset/monet.jpg" alt="monet" width = "300" height = "300" class="img-thumbnail"></a></li>
+		<li><a href = "/transfer/style/picasso"><img src="/static/style_preset/picasso.jpg" alt="picasso" width = "300" height = "300" class="img-thumbnail"></a></li>
+	</ul>
+    
 {% endblock %}

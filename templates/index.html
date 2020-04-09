@@ -1,50 +1,13 @@
 {% extends "layout.html" %}
 
 {% block head %}
-<title>Style Transfer</title>
-<script src = "{{ url_for('static',filename='js/index.js') }}"></script>
 {% endblock %}
 
 
 
 {% block body %}
-<header>
-	<div class="jumbotron text-center" style="margin-bottom:20">
-        	<h1>{{ page_title }}</h1>
-                <p>{{ page_info }}</p>
-	</div>
-</header>
-
-
-<form action = "/style" method = "POST" enctype = "multipart/form-data">
-	<div class = "custom-file mb-3">
-      		<input type = "file" id = "uploadImage" class="custom-file-input"  name = "file" accept='image/*' capture='camera'/>
-                <label class="custom-file-label">Choose image</label>
-        </div>
-        <div id="preview">
-                <img id="imagePreview" src="">
-        </div>      
-
-        <div style="text-align:center;">
-        	<button type = "submit" class="btn btn-info">Upload</button>
-        </div>
-</form>
-        <script>
-        // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function() {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-        </script>
-
-
+      <h1 class="mt-4 display-4 mb-2">About</h1>
+      <p class="lead mb-5">StyleTune provides neural style transfer services for web platform.</p>
+      <p class="lead mb-5">On <a href="/information">information tab</a>, there's reference about neural style transfer used in this service.</p>
+      <p class="lead mb-5">On <a href="/transfer">transfer tab</a>, you can transfer your own image with serveral presets.</p>
 {% endblock %}
-
-
-<script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-	var fileName = $(this).val().split("\\").pop();
-	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-</script>
