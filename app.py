@@ -62,7 +62,7 @@ def progress():
                         'content' : open('./static/Images/' + str(file_name), 'rb'),
                         'style':open('./static/style_preset/' + str(style) + ".jpg", 'rb') 
                     },
-                    headers={'api-key': '1ef3aab4-cb2d-4153-902b-8bebb1b14844'}
+                    #headers={'api-key': API_KEY}
                 )
                 print(r.json())
                 temp = r.json()["output_url"]
